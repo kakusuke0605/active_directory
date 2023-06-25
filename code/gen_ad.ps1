@@ -44,6 +44,11 @@ function CreateADUser() {
             Write-Warning "User $name NOT added to group $group_name because it does not exist"
         }
     }
+
+    # Add to local admin as needed
+    if ($userObject.local_admin){
+        net localgroup administrators $Global:Domain\$username /add
+    }
 }
 
 
